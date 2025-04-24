@@ -4,6 +4,20 @@ from textblob import TextBlob
 import re
 from googletrans import Translator
 
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-image: url("https://wallpapers.com/images/hd/black-carbon-fiber-1biekffyzs37csto.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Configuración de la página
 st.set_page_config(
     page_title="Analizador de Texto Simple",
