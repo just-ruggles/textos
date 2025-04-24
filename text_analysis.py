@@ -22,7 +22,7 @@ def subtitulo_azul(texto):
 # Título principal
 titulo_rojo("🕷 Analizador de Texto desarrollado por FNSM developers (Ganke)")
 
-st,markdown("""
+st.markdown("""
 Esta aplicación utiliza TextBlob para realizar un análisis básico de texto:
 - Análisis de sentimiento y subjetividad
 - Extracción de palabras clave
