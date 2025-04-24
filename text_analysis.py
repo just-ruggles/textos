@@ -4,6 +4,13 @@ from textblob import TextBlob
 import re
 from googletrans import Translator
 
+# Configuración de la página
+st.set_page_config(
+    page_title="Analizador de Texto Simple",
+    page_icon="📊",
+    layout="wide"
+)
+
 st.markdown(
     """
     <style>
@@ -16,13 +23,6 @@ st.markdown(
     </style>
     """,
     unsafe_allow_html=True
-)
-
-# Configuración de la página
-st.set_page_config(
-    page_title="Analizador de Texto Simple",
-    page_icon="📊",
-    layout="wide"
 )
 
 # Función de títulos en HTML con color
