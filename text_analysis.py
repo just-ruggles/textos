@@ -35,6 +35,60 @@ modo = st.sidebar.selectbox(
     ["Texto directo", "Archivo de texto"]
 )
 
+# Funciones auxiliares necesarias
+
+def limpiar_texto(texto):
+    texto = texto.lower()
+    texto = re.sub(r'[^a-záéíóúñü\s]', '', texto)
+    return texto
+
+def contar_palabras(texto):
+    texto_limpio = limpiar_texto(texto)
+    palabras = texto_limpio.split()
+    contador = {}
+    for palabra in palabras:
+        if len(palabra) > 2:  # descartamos preposiciones y similares
+            contador[palabra] = contador.get(palabra, 0) + 1
+    contador_ordenado = dict(sorted(contador.items(), key=lambda item: item[1], reverse=True))
+    return contador_ordenado
+
+def traducir_texto(texto):
+    traductor = Translator()
+    try:
+        traduccion = traductor.translate(texto, src='es', dest='en')
+        return traduccion.text
+    except:
+        return "Traducción no disponible"
+
+def dividir_en_frases(texto):
+    frases = re.split(r'[.!?]', texto)
+    return [f.strip() for f in frases if f.strip()]
+
+def procesar_texto(texto):
+    blob = TextBlob(texto)
+    sentimiento = blob.sentiment.polarity
+    subjetividad = blob.sentiment.subjectivity
+    contador = contar_palabras(texto)
+    texto_traducido = traducir_texto(texto)
+    
+    frases = dividir_en_frases(texto)
+    frases_procesadas = []
+    for f in frases:
+        frases_procesadas.append({
+            "original": f,
+            "traducido": traducir_texto(f)
+        })
+    
+    return {
+        "sentimiento": sentimiento,
+        "subjetividad": subjetividad,
+        "contador_palabras": contador,
+        "texto_original": texto,
+        "texto_traducido": texto_traducido,
+        "frases": frases_procesadas
+    }
+
+
 # Visualizaciones
 def crear_visualizaciones(resultados):
     col1, col2 = st.columns(2)
