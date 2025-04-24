@@ -18,13 +18,11 @@ def titulo_rojo(texto):
 def subtitulo_azul(texto):
     st.markdown(f"<h3 style='color:blue'>{texto}</h3>", unsafe_allow_html=True)
 
-def texto_azul(texto):
-    st.markdown(f"<span style='color:blue'>{texto}</span>", unsafe_allow_html=True)
 
 # Título principal
 titulo_rojo("🕷 Analizador de Texto desarrollado por FNSM developers (Ganke)")
 
-texto_azul("""
+st,markdown("""
 Esta aplicación utiliza TextBlob para realizar un análisis básico de texto:
 - Análisis de sentimiento y subjetividad
 - Extracción de palabras clave
