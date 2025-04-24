@@ -18,7 +18,6 @@ def titulo_rojo(texto):
 def subtitulo_azul(texto):
     st.markdown(f"<h3 style='color:blue'>{texto}</h3>", unsafe_allow_html=True)
 
-
 # Título principal
 titulo_rojo("🕷 Analizador de Texto desarrollado por FNSM developers (Ganke)")
 
@@ -36,10 +35,7 @@ modo = st.sidebar.selectbox(
     ["Texto directo", "Archivo de texto"]
 )
 
-# Funciones auxiliares (las mismas que ya tenías, no las copio aquí por espacio, pero se mantienen igual)
-# contar_palabras(), traducir_texto(), procesar_texto()
-
-# Visualizaciones (ajustar colores de encabezado)
+# Visualizaciones
 def crear_visualizaciones(resultados):
     col1, col2 = st.columns(2)
     
@@ -72,10 +68,10 @@ def crear_visualizaciones(resultados):
     with st.expander("Ver traducción completa"):
         col1, col2 = st.columns(2)
         with col1:
-            texto_azul("*Texto Original (Español):*")
+            st.markdown("*Texto Original (Español):*")
             st.text(resultados["texto_original"])
         with col2:
-            texto_azul("*Texto Traducido (Inglés):*")
+            st.markdown("*Texto Traducido (Inglés):*")
             st.text(resultados["texto_traducido"])
 
     subtitulo_azul("Frases detectadas")
@@ -97,7 +93,7 @@ def crear_visualizaciones(resultados):
     else:
         st.write("No se detectaron frases.")
 
-# Lógica principal según modo
+# Lógica principal
 if modo == "Texto directo":
     subtitulo_azul("Ingresa tu texto para analizar")
     texto = st.text_area("", height=200, placeholder="Escribe o pega aquí el texto que deseas analizar...")
@@ -108,6 +104,7 @@ if modo == "Texto directo":
                 crear_visualizaciones(resultados)
         else:
             st.warning("Por favor, ingresa algún texto para analizar.")
+
 elif modo == "Archivo de texto":
     subtitulo_azul("Carga un archivo de texto")
     archivo = st.file_uploader("", type=["txt", "csv", "md"])
@@ -125,17 +122,17 @@ elif modo == "Archivo de texto":
 
 # Información adicional
 with st.expander("📚 Información sobre el análisis"):
-    texto_azul("""
+    st.markdown("""
     ### Sobre el análisis de texto
     
-    - *Sentimiento*: Varía de -1 (muy negativo) a 1 (muy positivo)
-    - *Subjetividad*: Varía de 0 (muy objetivo) a 1 (muy subjetivo)
+    - *Sentimiento*: Varía de -1 (muy negativo) a 1 (muy positivo)  
+    - *Subjetividad*: Varía de 0 (muy objetivo) a 1 (muy subjetivo)  
     
     ### Requisitos mínimos
     
     Esta aplicación utiliza únicamente:
     
-    streamlit  
-    textblob  
-    pandas  
+    - streamlit  
+    - textblob  
+    - pandas  
     """)
